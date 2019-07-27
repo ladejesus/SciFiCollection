@@ -34,30 +34,29 @@ namespace SciFiCollection.Controllers
 
         // POST api/Show
         [HttpPost]
-        public ActionResult<IEnumerable<Show>> Post([FromBody] Show Show)
+        public ActionResult<IEnumerable<Show>> Post([FromBody] Show show)
         {
-            db.Shows.Add(Show);
+            db.Shows.Add(show);
             db.SaveChanges();
             return db.Shows.ToList();
         }
 
         // PUT api/values/5
         [HttpPut]
-        public ActionResult<IEnumerable<Show>> Put([FromBody] Show Show)
+        public ActionResult<IEnumerable<Show>> Put([FromBody] Show show)
         {
-            db.Shows.Update(Show);
+            db.Shows.Update(show);
             db.SaveChanges();
             return db.Shows.ToList();
         }
 
 
         [HttpDelete]
-        public ActionResult<IEnumerable<Show>> Delete(Show Show)
+        public ActionResult<IEnumerable<Show>> Delete(Show show)
         {
-            db.Shows.Remove(Show);
+            db.Shows.Remove(show);
             db.SaveChanges();
             return db.Shows.ToList();
         }
-
     }
 }

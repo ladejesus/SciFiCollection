@@ -34,11 +34,11 @@ namespace SciFiCollection.Controllers
 
         // POST api/Episode
         [HttpPost]
-        public ActionResult<Album> Post([FromBody] Episode episode)
+        public ActionResult<Season> Post([FromBody] Episode episode)
         {
             db.Episodes.Add(episode);
             db.SaveChanges();
-            return db.Seasons.Single(a => a.AlbumId == episode.SeasonId);
+            return db.Seasons.Single(a => a.SeasonId == episode.SeasonId);
         }
 
         // PUT api/values/5
