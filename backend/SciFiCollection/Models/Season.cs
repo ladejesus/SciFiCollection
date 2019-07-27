@@ -8,6 +8,7 @@ namespace SciFiCollection.Models
     public class Season
     {
         public int SeasonId { get; set; }
+        public int Seasons { get; set; }
         public string Description { get; set; }
         public string ProductionCompany { get; set; }
         public string ImageURL { get; set; }
