@@ -1,4 +1,31 @@
-*{
-    background-color:slategray;
+*{      
+    background-color:rgb(1, 1, 54);
     color: #DDD
 }
+
+
+
+
+nav{
+    top: 0;
+    background-color:rgb(1, 1, 54);
+    position: fixed;
+    width: 100%;
+    }
+        nav ul{
+            background-color:rgb(1, 1, 54);
+            display: flex;
+            flex-flow: row;
+            justify-content: space-around;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        nav li{
+            background-color: rgb(1, 1, 54);
+        }
+        
+        li:hover{
+            cursor: pointer;
+        }
+        
