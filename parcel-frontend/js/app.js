@@ -149,7 +149,7 @@ function showModal(){
         })
     document.getElementById('main').addEventListener('click', function(){
             if(event.target.classList.contains('add-show_submit')){
-            const showname = event.target.parentElement.querySelector('.add-show-name').value;
+            const showname = event.target.parentElement.querySelector('.add-show_name').value;
             const data = {
                 id: 0,
                 Name: showname,
@@ -253,14 +253,16 @@ function navSeasons(){
            
             const editseason_id = event.target.parentElement.querySelector('.season_id').value;
             const editseason_name = event.target.parentElement.querySelector('.edit-season_name').value;
+            const editseason_productioncompany = event.target.parentElement.querySelector('.edit-season_productionCompany').value;
             const editseason_description = event.target.parentElement.querySelector('.edit-season_description').value;
             const editseason_showId = event.target.parentElement.querySelector('.show_Id').value;
                        
             const data = {
-                SeasonId: editseason_id,
-                Name: editseason_name,
-                Description: editseason_description,
-                ShowId: editseason_showId
+                seasonId: editseason_id,
+                name: editseason_name,
+                productionCompany: editseason_productioncompany,
+                description: editseason_description,
+                showId: editseason_showId
             };
            
                 apiActions.putRequest('https://localhost:44370/api/season', data, seasons => {
@@ -296,10 +298,10 @@ function seasonModal(){
     document.getElementById('main').addEventListener('click', function(){
             if(event.target.classList.contains('add-season_submit')){
             const seasonname = event.target.parentElement.querySelector('.add-season_name').value;
-            const productioncompany = event.target.parentElement.querySelector('.add-season-productionCompany').value;
+            const productioncompany = event.target.parentElement.querySelector('.add-season_productioncompany').value;
             const maininfo = document.querySelector('#main-info')
             const showId = maininfo.querySelector('.show_Id').value
-            console.log(artistId)
+            console.log(showId)
             const data = {
                 seasonid: 0,
                 name: seasonname,

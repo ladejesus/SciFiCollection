@@ -9,7 +9,8 @@ export default function singleSeason(season){
                 <section class='edit-box'>
                     <input class='season_id' type='hidden' value='${season.seasonId}'>
                     <input class='edit-season_name' type='text' value='${season.name}'>
-                    <input class='edit-season_productionCompany' type='text' value='${season.productionCompany}'>
+                    <input class='edit-season_productioncompany' type='text' value='${season.productionCompany}'>
+                    <textarea class='edit-season_description'>${season.description}</textarea>
                     <input class='show_Id' type='hidden' value='${season.showId}'>
                     <button class='edit-Season_submit'>Submit</button>
                 </section>
