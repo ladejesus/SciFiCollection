@@ -80,12 +80,12 @@ nav{
                     #main-children{
                         padding-top: 1em;
                     }
-                    #main-children #album-list{
+                    #main-children #season-list{
                         list-style: none;
                         display: flex;
                         justify-content: space-between;
                     }
-                    #main-children #album-list li{
+                    #main-children #season-list li{
                         margin-right: 3em;
                     }
                     .child-image img{
@@ -94,7 +94,7 @@ nav{
                         border-radius: 3px;
                     }
     
-            .songs{
+            .shows{
                 padding: 1em;
             }
             .duration{
@@ -116,7 +116,7 @@ nav{
             #sidebar h3{
                 margin-left: 1em;
             }
-            #add-artist-modal{
+            #add-show-modal{
                 margin-left: 1em;
             }
             #sidebar ul{
@@ -130,4 +130,71 @@ nav{
                 padding-bottom: 1em;
                 list-style: none;
             }
-        
+
+
+/* modal */
+#boxbg{
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+    #secret-box{
+        width: 80%;
+        margin: 0 auto;
+        background: none;
+        margin-top: 25%;
+        display: flex;
+        background-color: #2e2e2e;
+        border-radius: 15px;
+    }
+    #box{
+            padding: 1em;
+            width: 100%;
+            background-color: #2e2e2e;
+            border-radius: 15px;
+            margin: 0 auto;
+    }
+
+        #closebutton{
+            top: 0;
+            color: #DDD;
+            font-size: 30px;
+            font-weight: normal;
+            font-family: sans-serif;
+            margin-left: 2em;
+            margin-right: 0.5em;
+            text-align: right;
+            background-color: #2e2e2e;
+            border-radius: 15px;
+        }
+            #closebutton:hover,
+            #closebutton:focus {
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+            .add-artist{
+                background-color: #2e2e2e;
+                display: flex;
+                justify-content: space-between;
+            }
+            .add-album{
+                background-color: #2e2e2e;
+                display: flex;
+                justify-content: space-between;
+            }
+
+    .edit-box{
+        display: none;
+    }
+
+    .edit-artist_description{
+        height: 150px;
+        width: 400px;
+        word-wrap: normal;
+        text-align: left;
+    }

@@ -9,12 +9,9 @@ import ShowSidebar from './components/showsidebar';
 import SeasonSidebar from './components/seasonsidebar';
 import EpisodeSidebar from './components/episodesidebar';
 
-import AddShowModal from './components/add-show-modal'
-import AddSeasonModal from './components/add-season-modal'
-import AddEpisodeModal from './components/add-episode-modal'
-
-
-
+import AddShowModal from './components/add-show-modal';
+import AddSeasonModal from './components/add-season-modal';
+import AddEpisodeModal from './components/add-episode-modal';
 
 pageBuild();
 
@@ -29,12 +26,7 @@ function pageBuild(){
     showModal();
     seasonModal();
     episodeModal();
-
-
-
-
-
-    
+   
 }
 
 
@@ -81,7 +73,7 @@ function navShows(){
             const removeshow_id = event.target.parentElement.querySelector('.show_id').value;
             console.log(removeshow_id)
             const data = {
-                ShowId: removeshow_id,
+                showId: removeshow_id,
             };
             console.log(data);
             
@@ -158,11 +150,10 @@ function showModal(){
     document.getElementById('main').addEventListener('click', function(){
             if(event.target.classList.contains('add-show_submit')){
             const showname = event.target.parentElement.querySelector('.add-show-name').value;
-            const showactor = event.target.parentElement.querySelector('.add-show-actor').value;
             const data = {
                 id: 0,
-                name: showname,
-                actor: showactor
+                Name: showname,
+               
             };
             apiActions.postRequest('https://localhost:44370/api/show', data, shows => {
                 document.querySelector('#sidebar').innerHTML = ShowSidebar(shows);
@@ -238,8 +229,8 @@ function navSeasons(){
             const removeseason_id = event.target.parentElement.querySelector('.season_id').value;
             console.log(removeseason_id)
             const data = {
-                artistId: singleshow_id,
-                albumId: removeseason_id,
+                showId: singleshow_id,
+                seasonId: removeseason_id,
             };
             console.log(data);
             
@@ -265,7 +256,7 @@ function navSeasons(){
         if (event.target.classList.contains('edit-season_submit')){
            
             const editseason_id = event.target.parentElement.querySelector('.season_id').value;
-            const editseason_seasons = event.target.parentElement.querySelector('.edit-season_name').value;
+            const editseason_name = event.target.parentElement.querySelector('.edit-season_name').value;
             const editseason_description = event.target.parentElement.querySelector('.edit-season_description').value;
             const editseason_showId = event.target.parentElement.querySelector('.show_Id').value;
                        
@@ -311,18 +302,18 @@ function seasonModal(){
     document.getElementById('main').addEventListener('click', function(){
             if(event.target.classList.contains('add-season_submit')){
             const seasonname = event.target.parentElement.querySelector('.add-season_name').value;
-            const prodcutioncompany = event.target.parentElement.querySelector('.add-season-productionCompany').value;
+            const productioncompany = event.target.parentElement.querySelector('.add-season-productionCompany').value;
             const maininfo = document.querySelector('#main-info')
             const showId = maininfo.querySelector('.show_Id').value
             console.log(artistId)
             const data = {
                 seasonid: 0,
                 name: seasonname,
-                productionCompany: productioncompany,
+                productioncompany: productioncompany,
                 showId: showId
             };
             console.log(seasonname)
-            console.log(prodcutioncompany)
+            console.log(productioncompany)
             console.log(showId)
             apiActions.postRequest('https://localhost:44370/api/season', data, show => {
                 document.querySelector('#main-info').innerHTML = SingleShow(show);       
@@ -333,9 +324,23 @@ function seasonModal(){
         }
         
     })
-}    
 
-           
+    const boxbg = document.getElementById('boxbg')
+    window.onclick = function(event){
+        if (event.target == boxbg){
+            boxbg.style.display = 'none';
+        }
+    }
+    const closebutton = document.getElementById('closebutton')
+    window.onclick = function(event){
+        if(event.target == closebutton){
+            boxbg.style.display = 'none';
+        }
+    }
+};
+
+        
+      
 
 
 
@@ -362,7 +367,7 @@ function navEpisodes(){
 
             };
             apiActions.postRequest('https://localhost:44370/api/episode', data, episodes => {
-                document.querySelector('#main-info').innerHTML = '';
+                document.querySelector('#main-info').innerHTML = "";
             })
             apiActions.getRequest('https://localhost:44370/api/season/'+ seasonId, 
             season =>{
@@ -444,14 +449,12 @@ function episodeModal(){
     document.getElementById('main').addEventListener('click', function(){
             if(event.target.classList.contains('add-episode_submit')){
             const episodename = event.target.parentElement.querySelector('.add-episode_name').value;
-            //const songduration = event.target.parentElement.querySelector('.add-song-duration').value;
             const maininfo = document.querySelector('#main-info')
             const seasonId = maininfo.querySelector('.season_Id').value
             console.log(episodeId)
             const data = {
                 episodeid: 0,
                 name: episodename,
-                //duration: songduration,
                 seasonId: seasonId
             };
             console.log(data)
