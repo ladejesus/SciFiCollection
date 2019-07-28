@@ -20,13 +20,13 @@ export default function singleSeason(season){
     <div id='main-children'>
     <button class='add-show-modal'>Add Show</button>
     <ol>
-        ${season.episodes.map(show => {
+        ${season.episodes.map(episode => {
             return `
                 <li>
                     <h3>${episode.name}</h3>
                     <input class='episode_id' type='hidden' value='${episode.episodeId}'>
                     <input class='episode_name' type='hidden' value='${episode.name}'>
-                    <input class='season_Id' type='hidden' value='${episode.SeasonId}'
+                    <input class='season_Id' type='hidden' value='${episode.seasonId}'
                     
                 </li>
     `;
