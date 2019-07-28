@@ -232,17 +232,13 @@ function navSeasons(){
                 showId: singleshow_id,
                 seasonId: removeseason_id,
             };
-            console.log(data);
-            
-            
+                     
             apiActions.deleteRequest('https://localhost:44370/api/season', data, seasons => {
-                    console.log(data);
                     document.querySelector('#main-info').innerHTML = "";
                     document.querySelector('#sidebar').innerHTML = SeasonSidebar(seasons);
                 }
             );
-
-            
+       
         }
     });
     
@@ -267,8 +263,7 @@ function navSeasons(){
                 ShowId: editseason_showId
             };
            
-            
-            apiActions.putRequest('https://localhost:44370/api/season', data, seasons => {
+                apiActions.putRequest('https://localhost:44370/api/season', data, seasons => {
                     
                     document.querySelector('#main-info').innerHTML = "";
                     document.querySelector('#sidebar').innerHTML = SeasonSidebar(seasons);
@@ -285,8 +280,7 @@ function navSeasons(){
                 document.querySelector('#main-info').innerHTML = SingleSeason(season)
             })
         }
-    })
-    
+    })   
 }
  
 
@@ -319,10 +313,8 @@ function seasonModal(){
                 document.querySelector('#main-info').innerHTML = SingleShow(show);       
                 })
                 boxbg.style.display = 'none';
-
-            
-        }
-        
+  
+        } 
     })
 
     const boxbg = document.getElementById('boxbg')
@@ -339,11 +331,7 @@ function seasonModal(){
     }
 };
 
-        
-      
-
-
-
+   
 function navEpisodes(){
     const episodesbutton = document.querySelector('#nav__episodes')
     console.log(episodesbutton)
@@ -407,15 +395,13 @@ function navEpisodes(){
             const editepisode_name = event.target.parentElement.querySelector('.edit-episode_name').value;
             const editepisode_seasonId = event.target.parentElement.querySelector('.season_Id').value;
 
-            
             const data = {
                 EpisodeId: editepisode_id,
                 Name: editepisode_name,
                 SeasonId: editepisode_seasonId
 
             };
-           
-            
+                       
             apiActions.putRequest('https://localhost:44370/api/episode', data, episodes => {
                    
                     document.querySelector('#main-info').innerHTML = "";
