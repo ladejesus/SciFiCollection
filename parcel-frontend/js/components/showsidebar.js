@@ -3,16 +3,16 @@ export default function ShowSidebar(shows){
     <h3>Select Show</h3>
     <ul>
     
-    ${artists.map(show => {
+    ${shows.map(show => {
         return `
             <li>
                 <h3 class='artist_name'>${show.name}</h3>
-                <input class='artist_id' type='hidden' value='${show.showId}'>
+                <input class='show_id' type='hidden' value='${show.showId}'>
             </li>
         `;
     })
     .join("")}
         </ul>
-        <button class='add-artist-modal'>Add Show</button>
+        <button class='add-show-modal'>Add Show</button>
     `
 }

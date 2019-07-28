@@ -28,4 +28,106 @@ nav{
         li:hover{
             cursor: pointer;
         }
+
+        #main{
+            padding-top: 3em;
+            display: grid;
+            grid-template-columns: 1fr 85%;
+            width: 100%;
+        }
+            #main-image{
+                width:300px;
+                margin: 10px;
+                margin-left: 0px;
+                margin-top: 0px;
+                border-style: solid;
+                border-radius: 3px;
+            }
+            #main-info{
+                display: grid;
+                grid-template-columns: 325px 55%;
+                grid-template-rows: 306px 1fr;
+                padding-left: 1em;
+            }
+                #name-info{
+                    display: grid;
+                    grid-template-columns: 1fr 1fr
+                
+                }
+                #name-info p{
+                    grid-column-start: 1;
+                    grid-column-end: 3;
+                }
+                #name-info a:hover{
+                    color: rgb(1, 1, 54);
+                }
+                    #button-box{
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        grid-template-rows: 1fr 1fr; 
+                        grid-gap: 40px;
+                        margin-block-start: 1em;
+                        font-size: 1.17em;
+                    }
+                        #button-box button:hover{
+                            background-color: #DDD;
+                            color:rgb(1, 1, 54);
+                        }
+                    #info{
+                        grid-column-start: 1;
+                        grid-column-end: 3;
+                    }
+                    #main-children{
+                        padding-top: 1em;
+                    }
+                    #main-children #album-list{
+                        list-style: none;
+                        display: flex;
+                        justify-content: space-between;
+                    }
+                    #main-children #album-list li{
+                        margin-right: 3em;
+                    }
+                    .child-image img{
+                        width: 200px;
+                        border-style: solid;
+                        border-radius: 3px;
+                    }
+    
+            .songs{
+                padding: 1em;
+            }
+            .duration{
+                justify-self: right;
+                grid-column-start: 2;
+            }
+        
+        #sidebar{
+            left: 0;
+            top: 0;
+            bottom: 0;
+            height: 100%;
+            border-style: solid;
+            border-left: 0;
+            border-top: 0;
+            border-bottom: 0;
+            border-color: #DDD;
+        }
+            #sidebar h3{
+                margin-left: 1em;
+            }
+            #add-artist-modal{
+                margin-left: 1em;
+            }
+            #sidebar ul{
+                padding-left: 10px;
+                display: flex;
+                flex-direction: column;            
+            }
+    
+            #sidebar ul li{
+                padding-right: 1em;
+                padding-bottom: 1em;
+                list-style: none;
+            }
         

@@ -1,12 +1,20 @@
 import Home from './components/home';
 import apiActions from './api/api-actions';
 
+import SingleShow from './components/singleshow';
+import SingleSeason from './components/singleseason';
+//import SingleEpisode from './components/singleepisode';
+
 import ShowSidebar from './components/showsidebar';
 import SeasonSidebar from './components/seasonsidebar';
-import EpisodeSidebar from './components/episodesidebar';
+// import EpisodeSidebar from './components/episodesidebar';
+
+import AddShowModal from './components/add-show-modal'
+//import AddSeasonModal from './components/add-season-modal'
+//import AddEpisodeModal from './components/add-episode-modal'
 
 
-import Show from './components/show'
+
 
 pageBuild();
 
@@ -14,13 +22,13 @@ function pageBuild(){
     home();
     navShows();
     navSeasons();
-    navEpisodes();
+    // navEpisodes();
 
     editBoxDisplay();
     
     showModal();
-    seasonModal();
-    episodeModal();
+    // seasonModal();
+    // episodeModal();
 
 
 
@@ -42,9 +50,9 @@ function home(){
 function navShows(){
     const showsbutton = document.querySelector('#nav__shows')
     console.log(showsbutton)
-    artistsbutton.addEventListener('click', function(){
+    showsbutton.addEventListener('click', function(){
         apiActions.getRequest(
-            'https://localhost:44301/api/show', 
+            'https://localhost:44370/api/show', 
             shows => {
                 document.querySelector('#sidebar').innerHTML = ShowSidebar(shows)
             }
@@ -61,7 +69,7 @@ function navShows(){
                 name: newshow
 
             };
-            apiActions.postRequest('https://localhost:44301/api/show', data, shows => {
+            apiActions.postRequest('https://localhost:44370/api/show', data, shows => {
                 document.querySelector('#sidebar').innerHTML = showSidebar(shows);
             })
         }
@@ -77,7 +85,7 @@ function navShows(){
             };
             console.log(data);
             
-            apiActions.deleteRequest('https://localhost:44301/api/show', data, shows => {
+            apiActions.deleteRequest('https://localhost:44370/api/show', data, shows => {
                     console.log(data);
                     document.querySelector('#main-info').innerHTML = "";
                     document.querySelector('#sidebar').innerHTML = ShowSidebar(shows);
@@ -109,7 +117,7 @@ function navShows(){
                 Description: editshow_description
             };
                        
-            apiActions.putRequest('https://localhost:44301/api/show', data, shows => {
+            apiActions.putRequest('https://localhost:44370/api/show', data, shows => {
                    
                     document.querySelector('#main-info').innerHTML ="";
                     document.querySelector('#sidebar').innerHTML = ShowSidebar(shows);
@@ -120,9 +128,9 @@ function navShows(){
     
     document.getElementById('sidebar').addEventListener('click', function(){
         if (event.target.classList.contains('show_name')){
-            const artistId = event.target.parentElement.querySelector('.show_id').value
+            const showId = event.target.parentElement.querySelector('.show_id').value
             console.log(showId)
-            apiActions.getRequest('https://localhost:44301/api/show/'+ showId, 
+            apiActions.getRequest('https://localhost:44370/api/show/'+ showId, 
             show =>{
                 document.querySelector('#main-info').innerHTML = SingleShow(show)
             })
@@ -131,7 +139,7 @@ function navShows(){
     document.getElementById('main-info').addEventListener('click', function(){
         if (event.target.classList.contains('target')){
             const seasonId = event.target.parentElement.querySelector('.season_id').value
-            apiActions.getRequest('https://localhost:44301/api/season/'+ seasonId, 
+            apiActions.getRequest('https://localhost:44370/api/season/'+ seasonId, 
             season =>{
                     document.querySelector('#main-info').innerHTML = SingleSeason(season)
                     })
@@ -149,14 +157,14 @@ function showModal(){
         })
     document.getElementById('main').addEventListener('click', function(){
             if(event.target.classList.contains('add-show_submit')){
-            const showname = event.target.parentElement.querySelector('.add-show_name').value;
+            const showname = event.target.parentElement.querySelector('.add-show-name').value;
             const showactor = event.target.parentElement.querySelector('.add-show-actor').value;
             const data = {
                 id: 0,
                 name: showname,
                 actor: showactor
             };
-            apiActions.postRequest('https://localhost:44301/api/show', data, shows => {
+            apiActions.postRequest('https://localhost:44370/api/show', data, shows => {
                 document.querySelector('#sidebar').innerHTML = ShowSidebar(shows);
                 
                 })
@@ -177,3 +185,116 @@ function showModal(){
             }
         }
 };
+
+function editBoxDisplay(){
+    document.getElementById('main').addEventListener('click', function() {
+        if (event.target.classList.contains('edit-button')) {
+            const editbox = event.target.parentElement.querySelector('.edit-box')
+            console.log(editbox)
+            editbox.style.display = 'block'
+        }
+    })
+}
+
+
+
+function navSeasons(){
+    const seasonsbutton = document.querySelector('#nav__seasons')
+    console.log(seasonsbutton)
+    seasonsbutton.addEventListener('click', function(){
+        apiActions.getRequest(
+            'https://localhost:44370/api/season', 
+            seasons => {
+                document.querySelector('#sidebar').innerHTML = SeasonSidebar(seasons)
+            }
+        )
+        document.querySelector('#main-info').innerHTML = "";
+    })
+
+    document.getElementById('main-info').addEventListener('click', function() {
+        if (event.target.classList.contains('add-season_submit')) {
+            const newseason = event.target.parentElement.querySelector('.add-season_name').value;
+            const showId = event.target.parentElement.querySelector('.show_Id').value
+            const data = {
+                Id: 0,
+                name: newseason
+                
+            };
+            apiActions.postRequest('https://localhost:44370/api/season', data, seasons => {
+                document.querySelector('#main-info').innerHTML = "";
+            })
+            apiActions.getRequest('https://localhost:44370/api/show/'+ showId, 
+            show =>{
+                document.querySelector('#main-info').innerHTML = SingleShow(show)
+            })
+
+        }
+    })
+    
+    document.getElementById('main-info').addEventListener('click', function(){
+        if (event.target.classList.contains('delete-season')){
+            console.log('event triggered');
+            const singleshow_id = event.target.parentElement.querySelector('.show_Id').value;
+            const removeseason_id = event.target.parentElement.querySelector('.season_id').value;
+            console.log(removeseason_id)
+            const data = {
+                artistId: singleshow_id,
+                albumId: removeseason_id,
+            };
+            console.log(data);
+            
+            
+            apiActions.deleteRequest('https://localhost:44370/api/season', data, seasons => {
+                    console.log(data);
+                    document.querySelector('#main-info').innerHTML = "";
+                    document.querySelector('#sidebar').innerHTML = SeasonSidebar(seasons);
+                }
+            );
+
+            
+        }
+    });
+    
+    document.getElementById('main-info').addEventListener('click', function()
+    {
+        if (event.target.classList.contains('edit-season')){
+            const editbox = event.target.parentElement.querySelector('.edit-box')
+            editbox.style.display = 'block'
+
+        }
+        if (event.target.classList.contains('edit-season_submit')){
+           
+            const editseason_id = event.target.parentElement.querySelector('.season_id').value;
+            const editseason_name = event.target.parentElement.querySelector('.edit-season_name').value;
+            const editseason_description = event.target.parentElement.querySelector('.edit-season_description').value;
+            const editseason_showId = event.target.parentElement.querySelector('.show_Id').value;
+                       
+            const data = {
+                SeasonId: editseason_id,
+                Name: editseason_name,
+                Description: editseason_description,
+                ShowId: editseason_showId
+            };
+           
+            
+            apiActions.putRequest('https://localhost:44370/api/season', data, seasons => {
+                    
+                    document.querySelector('#main-info').innerHTML = "";
+                    document.querySelector('#sidebar').innerHTML = SeasonSidebar(seasons);
+                }
+            );
+        }
+    });
+    document.getElementById('sidebar').addEventListener('click', function(){
+        if (event.target.classList.contains('season_name')){
+            const seasonId = event.target.parentElement.querySelector('.season_id').value
+            console.log(seasonId)
+            apiActions.getRequest('https://localhost:44370/api/season/'+ seasonId, 
+            album =>{
+                document.querySelector('#main-info').innerHTML = SingleSeason(season)
+            })
+        }
+    })
+    
+}
+ 

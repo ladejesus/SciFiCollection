@@ -1,26 +1,26 @@
-export default function singleSeason(Season){
+export default function singleSeason(season){
     return `
 
-    <img src='${Season.imageURL}' id='main-image' alt='Season image'>
-    <div id='name-info'><h3>${Season.name}</h3>
+    <img src='${season.imageURL}' id='main-image' alt='season image'>
+    <div id='name-info'><h3>${season.name}</h3>
         <div id='button-box'>
-            <button class='edit-Season'>Edit Season</button>
-            <button class='delete-Season'>Delete Season</button>
+            <button class='edit-season'>Edit season</button>
+            <button class='delete-season'>Delete season</button>
                 <section class='edit-box'>
-                    <input class='Season_id' type='hidden' value='${Season.SeasonId}'>
-                    <input class='edit-Season_name' type='text' value='${Season.name}'>
-                    <input class='edit-Season_productionCompany' type='text' value='${Season.productionCompany}'>
-                    <input class='show_Id' type='hidden' value='${Season.showId}'>
+                    <input class='season_id' type='hidden' value='${season.seasonId}'>
+                    <input class='edit-season_name' type='text' value='${season.name}'>
+                    <input class='edit-season_productionCompany' type='text' value='${season.productionCompany}'>
+                    <input class='show_Id' type='hidden' value='${season.showId}'>
                     <button class='edit-Season_submit'>Submit</button>
                 </section>
         </div>
-    <p>${Season.description}</p>
+    <p>${season.description}</p>
 
     </div>
     <div id='main-children'>
     <button class='add-show-modal'>Add Show</button>
     <ol>
-        ${Season.episodes.map(show => {
+        ${season.episodes.map(show => {
             return `
                 <li>
                     <h3>${episode.name}</h3>
