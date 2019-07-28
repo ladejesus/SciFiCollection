@@ -3,18 +3,15 @@ import apiActions from './api/api-actions';
 
 import SingleShow from './components/singleshow';
 import SingleSeason from './components/singleseason';
-//import SingleEpisode from './components/singleepisode';
+import SingleEpisode from './components/singleepisode';
 
 import ShowSidebar from './components/showsidebar';
 import SeasonSidebar from './components/seasonsidebar';
-// import EpisodeSidebar from './components/episodesidebar';
+import EpisodeSidebar from './components/episodesidebar';
 
-import AddShowModal from './components/add-show-modal'
-//import AddSeasonModal from './components/add-season-modal'
-//import AddEpisodeModal from './components/add-episode-modal'
-
-
-
+import AddShowModal from './components/add-show-modal';
+import AddSeasonModal from './components/add-season-modal';
+import AddEpisodeModal from './components/add-episode-modal';
 
 pageBuild();
 
@@ -22,19 +19,14 @@ function pageBuild(){
     home();
     navShows();
     navSeasons();
-    // navEpisodes();
+    navEpisodes();
 
     editBoxDisplay();
     
     showModal();
-    // seasonModal();
-    // episodeModal();
-
-
-
-
-
-    
+    seasonModal();
+    episodeModal();
+   
 }
 
 
@@ -81,7 +73,7 @@ function navShows(){
             const removeshow_id = event.target.parentElement.querySelector('.show_id').value;
             console.log(removeshow_id)
             const data = {
-                ShowId: removeshow_id,
+                showId: removeshow_id,
             };
             console.log(data);
             
@@ -158,11 +150,10 @@ function showModal(){
     document.getElementById('main').addEventListener('click', function(){
             if(event.target.classList.contains('add-show_submit')){
             const showname = event.target.parentElement.querySelector('.add-show-name').value;
-            const showactor = event.target.parentElement.querySelector('.add-show-actor').value;
             const data = {
                 id: 0,
-                name: showname,
-                actor: showactor
+                Name: showname,
+               
             };
             apiActions.postRequest('https://localhost:44370/api/show', data, shows => {
                 document.querySelector('#sidebar').innerHTML = ShowSidebar(shows);
@@ -238,8 +229,8 @@ function navSeasons(){
             const removeseason_id = event.target.parentElement.querySelector('.season_id').value;
             console.log(removeseason_id)
             const data = {
-                artistId: singleshow_id,
-                albumId: removeseason_id,
+                showId: singleshow_id,
+                seasonId: removeseason_id,
             };
             console.log(data);
             
@@ -290,7 +281,7 @@ function navSeasons(){
             const seasonId = event.target.parentElement.querySelector('.season_id').value
             console.log(seasonId)
             apiActions.getRequest('https://localhost:44370/api/season/'+ seasonId, 
-            album =>{
+            season =>{
                 document.querySelector('#main-info').innerHTML = SingleSeason(season)
             })
         }
@@ -298,3 +289,195 @@ function navSeasons(){
     
 }
  
+
+function seasonModal(){
+    document.getElementById('main').addEventListener('click', function() {
+        if (event.target.classList.contains('add-season-modal')) {
+            const modal = document.getElementById('boxbg')
+            const modalbox = document.getElementById('box')
+            modalbox.innerHTML = AddSeasonModal()
+            modal.style.display = 'block'};
+        })
+
+    document.getElementById('main').addEventListener('click', function(){
+            if(event.target.classList.contains('add-season_submit')){
+            const seasonname = event.target.parentElement.querySelector('.add-season_name').value;
+            const productioncompany = event.target.parentElement.querySelector('.add-season-productionCompany').value;
+            const maininfo = document.querySelector('#main-info')
+            const showId = maininfo.querySelector('.show_Id').value
+            console.log(artistId)
+            const data = {
+                seasonid: 0,
+                name: seasonname,
+                productioncompany: productioncompany,
+                showId: showId
+            };
+            console.log(seasonname)
+            console.log(productioncompany)
+            console.log(showId)
+            apiActions.postRequest('https://localhost:44370/api/season', data, show => {
+                document.querySelector('#main-info').innerHTML = SingleShow(show);       
+                })
+                boxbg.style.display = 'none';
+
+            
+        }
+        
+    })
+
+    const boxbg = document.getElementById('boxbg')
+    window.onclick = function(event){
+        if (event.target == boxbg){
+            boxbg.style.display = 'none';
+        }
+    }
+    const closebutton = document.getElementById('closebutton')
+    window.onclick = function(event){
+        if(event.target == closebutton){
+            boxbg.style.display = 'none';
+        }
+    }
+};
+
+        
+      
+
+
+
+function navEpisodes(){
+    const episodesbutton = document.querySelector('#nav__episodes')
+    console.log(episodesbutton)
+    episodesbutton.addEventListener('click', function(){
+        apiActions.getRequest(
+            'https://localhost:44370/api/episode', 
+            episodes => {
+                document.querySelector('#sidebar').innerHTML = EpisodeSidebar(episodes)
+            }
+        )
+        document.querySelector('#main-info').innerHTML = "";
+    });
+
+    document.getElementById('main-info').addEventListener('click', function() {
+        if (event.target.classList.contains('add-episode_submit')) {
+            const newepisode = event.target.parentElement.querySelector('.add-episode_name').value;
+            const seasonId = event.target.parentElement.querySelector('.season_Id').value
+            const data = {
+                seasonId: 0,
+                name: newepisode
+
+            };
+            apiActions.postRequest('https://localhost:44370/api/episode', data, episodes => {
+                document.querySelector('#main-info').innerHTML = "";
+            })
+            apiActions.getRequest('https://localhost:44370/api/season/'+ seasonId, 
+            season =>{
+                document.querySelector('#main-info').innerHTML = SingleShow(season)
+            })
+        }
+    });
+    
+    document.getElementById('main-info').addEventListener('click', function(){
+        if (event.target.classList.contains('delete-episode')){
+            console.log('event triggered');
+            const removeepisode_id = event.target.parentElement.querySelector('.episode_id').value;
+            console.log(removeepisode_id)
+            const data = {
+                EpisodeId: removeepisode_id,
+            };
+            console.log(data);
+            
+            apiActions.deleteRequest('https://localhost:44370/api/episode', data, episodes => {
+                    console.log(data);
+                    document.querySelector('#main-info').innerHTML = "";
+                    document.querySelector('#sidebar').innerHTML = EpisodeSidebar(episodes);
+                }
+            );
+        }
+    });
+    
+    document.getElementById('main-info').addEventListener('click', function(){
+        if (event.target.classList.contains('edit-episode')){
+            const editbox = event.target.parentElement.querySelector('.edit-box')
+            editbox.style.display = 'block'
+
+        }
+        if (event.target.classList.contains('edit-episode_submit')){
+            console.log('event triggered');
+            const editepisode_id = event.target.parentElement.querySelector('.episode_id').value;
+            const editepisode_name = event.target.parentElement.querySelector('.edit-episode_name').value;
+            const editepisode_seasonId = event.target.parentElement.querySelector('.season_Id').value;
+
+            
+            const data = {
+                EpisodeId: editepisode_id,
+                Name: editepisode_name,
+                SeasonId: editepisode_seasonId
+
+            };
+           
+            
+            apiActions.putRequest('https://localhost:44370/api/episode', data, episodes => {
+                   
+                    document.querySelector('#main-info').innerHTML = "";
+                    document.querySelector('#sidebar').innerHTML = EpisodeSidebar(episodes);                    
+                        }
+                        
+                    )
+        }
+    });
+
+    document.getElementById('sidebar').addEventListener('click', function(){
+        if (event.target.classList.contains('episode_name')){
+            const episodeId = event.target.parentElement.querySelector('.episode_id').value
+            console.log(episodeId)
+            apiActions.getRequest('https://localhost:44370/api/episode/'+ episodeId, 
+            episode =>{
+                document.querySelector('#main-info').innerHTML = SingleEpisode(episode)
+            })
+        }
+    })
+}
+
+function episodeModal(){
+    document.getElementById('main').addEventListener('click', function() {
+        if (event.target.classList.contains('add-episode-modal')) {
+            const modal = document.getElementById('boxbg')
+            const modalbox = document.getElementById('box')
+            modalbox.innerHTML = AddEpisodeModal()
+            modal.style.display = 'block'};
+        })
+    document.getElementById('main').addEventListener('click', function(){
+            if(event.target.classList.contains('add-episode_submit')){
+            const episodename = event.target.parentElement.querySelector('.add-episode_name').value;
+            const maininfo = document.querySelector('#main-info')
+            const seasonId = maininfo.querySelector('.season_Id').value
+            console.log(episodeId)
+            const data = {
+                episodeid: 0,
+                name: episodename,
+                seasonId: seasonId
+            };
+            console.log(data)
+            console.log(name)
+            console.log(seasonId)
+            apiActions.postRequest('https://localhost:44370/api/episode', data, season => {
+                document.querySelector('#main-info').innerHTML = Singleseason(season);
+                })
+                boxbg.style.display = 'none';
+
+            }
+        })
+
+        const boxbg = document.getElementById('boxbg')
+        window.onclick = function(event){
+            if (event.target == boxbg){
+                boxbg.style.display = 'none';
+            }
+        }
+        const closebutton = document.getElementById('closebutton')
+        window.onclick = function(event){
+            if(event.target == closebutton){
+                boxbg.style.display = 'none';
+            }
+        }
+};

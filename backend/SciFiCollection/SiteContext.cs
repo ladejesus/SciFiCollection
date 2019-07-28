@@ -57,7 +57,7 @@ namespace SciFiCollection
                 new Season()
                 {
                     SeasonId = 1,
-                    Seasons = 7,
+                    Name = "Voyager Season 1",
                     Description = "Star Trek: Voyager (VOY) focuses on the 24th century adventures of Captain Kathryn Janeway aboard the U.S.S. Voyager.  Smaller than either Kirk’s or Picard’s starships—its crew complement is only 150—Voyager is fast and powerful, and has the ability to land on a planet’s surface.  It is one of the most technologically advanced vessels in Starfleet, utilizing computer circuitry that incorporates synthetic neural tissue.  Ironically, Janeway’s inaugural mission aboard Voyager was to be her last in the Alpha quadrant.  While attempting to capture the crew of a renegade Maquis vessel, both her ship and that of the Maquis were pulled into the distant Delta quadrant by powerful alien technology.  Unfortunately, there would be no similar “express” route to take them home again.  Stranded 70,000 light-years from Earth, Janeway convinced the Maquis to join her Starfleet crew and serve together during the long voyage back to Federation space",
                     ImageURL = "https://m.media-amazon.com/images/M/MV5BN2ExMzM5OGQtM2M1Yy00OWM1LWE1YWMtYTQzNjQ5YmE1NjU3XkEyXkFqcGdeQXVyMzQ2MDUxMTg@._V1_UX224_CR0,0,224,126_AL_.jpg",
                     ProductionCompany = "Paramount Television",
@@ -66,7 +66,7 @@ namespace SciFiCollection
                 new Season()
                 {
                     SeasonId = 2,
-                    Seasons = 4,
+                    Name = "Stranger Things Season 1",
                     Description = "After the mysterious and sudden vanishing of a young boy, the people of a small town begin to uncover secrets of a government lab, portals to another world, and sinister monsters. The boy's mother, Joyce, desperately tries to find him, and is convinced he is in grave danger, while the police chief searches for answers. Trying to help find him, the boy's friends discover a strange little girl, who is on the run from bad men.",
                     ImageURL = "https://m.media-amazon.com/images/M/MV5BMTUwNTE0ODYzOF5BMl5BanBnXkFtZTgwOTc0ODE0OTE@._V1_UY268_CR109,0,182,268_AL_.jpg",
                     ProductionCompany = "Monkey Massacre",
@@ -75,7 +75,7 @@ namespace SciFiCollection
                 new Season()
                 {
                     SeasonId = 3,
-                    Seasons = 1,
+                    Name = "Battlestar Galactica Season 1",
                     Description = "With the 12 colonies of man virtually destroyed in the climax of a hundred-year war[1] with the Cylon Empire, President Roslin (Mary McDonnell) and Commander Adama (Edward James Olmos) gather up the few humans left and embark on a journey to find the mythical planet Earth, not realizing that the Cylon robot is no longer a recognizable enemy. Battlestar Galactica is a complete re-imagining of the 1970s series – upping the ante on the action, adventure, and drama that made the original so popular. ",
                     ImageURL = "https://m.media-amazon.com/images/M/MV5BMTUzNzY1Nzg0Nl5BMl5BanBnXkFtZTcwNTYxOTAzMQ@@._V1_UX182_CR0,0,182,268_AL_.jpg",
                     ProductionCompany = "R&D TV",

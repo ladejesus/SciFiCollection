@@ -6,7 +6,7 @@ export default function ShowSidebar(shows){
     ${shows.map(show => {
         return `
             <li>
-                <h3 class='artist_name'>${show.name}</h3>
+                <h3 class='show_name'>${show.name}</h3>
                 <input class='show_id' type='hidden' value='${show.showId}'>
             </li>
         `;
